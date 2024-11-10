@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-catalog">
+        <h1 class="title" style="font-size: 40px; color: #e91e63">{{Music.Title}}</h1>
+            <div class="item">
+                <img style="height: 200px; width: 200px;" src="{{MEDIA_URL}}/media/{{Music.Image}}" alt="Track cover" class="cover">
+                <div class="info">
+                    <a class="artist" href="{% url 'Cur_author' author_id=Music.Author_id %}">{{Music.Author}}</a>
+                    <audio id="CatalogAudio{{Music.id}}" controls class="MyMainAudio">
+                      <source src="{{MEDIA_URL}}/media/{{Music.Music}}" type="audio/mp3">
+                    </audio>
+                </div>
+                <div class="actions">
+<button value="{{Music.id}}" class="loop-button" id="loopButton" onclick="loop(this)">loop</button>
+                    <i style="margin-top: 30px;" class="heart fas fa-heart"></i>
+                </div>
+            </div>
+    </div>
+{% endblock %}

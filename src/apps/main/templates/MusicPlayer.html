@@ -1,0 +1,25 @@
+<div class="PlayerPanel" id="PlayerPanel">
+            <div class="AudioPlayer">
+                <div class="item">
+                    <img name='{{Absolute_Len}}' id='MusicImageMini' src="" alt="Track cover" class="cover">
+                    <div class="info">
+                        {% if Pagename == "Популярные треки" %}
+                            <a href="" class="title" id="ref_title"></a>
+                            <a href="" class="artist" id="ref_author"></a>
+                        {% elif Pagename == "Любимые композиции" %}
+                            <a id="ref_title" href="" class="title"></a>
+                            <a id="ref_author" href="" class="artist"></a>
+                        {% else %}
+                            <a id="ref_title" href="" class="title"></a>
+                            <a id="ref_author" href="" class="artist"></a>
+                        {% endif %}
+                        <audio id="CatalogAudio-mini" controls class="MyMiniAudio" onended="MiniAudioEnd()">
+                          <source id="SorceCatalogAudio-mini" src="" type="audio/mp3">
+                        </audio>
+                    </div>
+                    <div class="actions">
+                        <button value="3_{{Len}}" class="loop-button" id="loopButtonMini" onclick="loopmini(this)" style="margin-bottom: 10px;">loop</button>
+                    </div>
+                </div>
+            </div>
+        </div>

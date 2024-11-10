@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-catalog" id="main-div">
+        <h1>{{Pagename}} {{mini_music.id}}</h1>
+        {% for music in Musics %}
+            <div class="item">
+                <img id='MusicImage{{music.id}}' src="{{MEDIA_URL}}/media/{{music.Image}}" alt="Track cover" class="cover">
+                <div class="info">
+                    {% if Pagename == "Популярные треки" %}
+                        <a id='MusicRefTitle{{music.id}}' href="PlayMusic/{{music.id}}" class="title">{{music.Title}}</a>
+                        <a id='MusicRefAuthor{{music.id}}' href="Author/{{music.Author_id}}" class="artist">{{music.Author}}</a>
+                    {% elif Pagename == "Любимые композиции" %}
+                        <a id='MusicRefTitle{{music.id}}' href="PlayMusic/{{music.id}}" class="title">{{music.Title}}</a>
+                        <a id='MusicRefAuthor{{music.id}}' href="Author/{{music.Author_id}}" class="artist">{{music.Author}}</a>
+                    {% else %}
+                        <a id='MusicRefTitle{{music.id}}' href="{% url 'Cur_music' music_id=music.id %}" class="title">{{music.Title}}</a>
+                        <a id='MusicRefAuthor{{music.id}}' href="{% url 'Cur_author' author_id=music.Author_id %}" class="artist">{{music.Author}}</a>
+                    {% endif %}
+                    <audio id="CatalogAudio{{music.id}}" controls class="MyMainAudio" onended="AudioEnd({{music.id}},{{Len}})">
+                      <source id='SourceCatalogAudio{{music.id}}' src="{{MEDIA_URL}}/media/{{music.Music}}" type="audio/mp3">
+                    </audio>
+                </div>
+                <div class="actions">
+                <button name='{{music.id}}' value="{{music.id}}_{{Len}}" class="loop-button" id="loopButton" onclick="loop(this)">loop</button>
+                    {% if user.is_authenticated %}
+                        {% if music.id in Like_tracks %}
+                            <button class="h_container" onclick="like(this)" value="{{music.id}}_unlike" id="likeButton">
+                                <i id="heart-liked" class="heart fas fa-heart"></i>
+                            </button>
+                        {% else %}
+                            <button class="h_container" onclick="like(this)" value="{{music.id}}_like" id="likeButton">
+                                <i id="heart" class="heart fas fa-heart"></i>
+                            </button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

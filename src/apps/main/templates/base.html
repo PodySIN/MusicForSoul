@@ -1,0 +1,36 @@
+{% load static %}
+<html lang="ru" class="h-100">
+
+{% block head %}
+    {% include 'head.html' %}
+{% endblock %}
+    <body class="d-flex flex-column h-100">
+        <header>
+            {% block header %}
+                {% include 'header.html' %}
+            {% endblock %}
+        </header>
+
+        <main role="main" class="mt-3 flex-shrink-0">
+            <div class="container">
+                {% include 'messages.html' %}
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </main>
+        {% include 'MusicPlayer.html' %}
+        <footer class="footer mt-auto py-3">
+            {% block footer %}
+            <hr>
+                {% include 'footer.html' %}
+            {% endblock %}
+        </footer>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script>hljs.highlightAll();</script>
+    <script src="{% static 'js/music_player.js' %}" type="text/javascript"></script>
+    </body>
+
+</html>

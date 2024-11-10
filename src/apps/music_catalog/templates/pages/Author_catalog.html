@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-catalog">
+        <h1 class="title" style="font-size: 40px; color: #e91e63">{{Author_name}}</h1>
+        {% for music in Musics %}
+            <div class="item">
+                <img src="{{MEDIA_URL}}/media/{{music.Image}}" alt="Track cover" class="cover">
+                <div class="info">
+                    <a href="{% url 'Cur_music' music_id=music.id %}" class="title">{{music.Title}}</a>
+                    <a href="{% url 'Cur_author' author_id=music.Author_id %}" class="artist">{{music.Author}}</a>
+                    <audio id="CatalogAudio{{music.id}}" controls class="MyMainAudio" onended="AudioEnd({{music.id}},{{Len}})">
+                      <source src="{{MEDIA_URL}}/media/{{music.Music}}" type="audio/mp3">
+                    </audio>
+                </div>
+                <div class="actions">
+                    <button value="{{music.id}}_{{Len}}" class="loop-button" id="loopButton" onclick="loop(this)">loop</button>
+                    {% if user.is_authenticated %}
+                        {% if music.id in Like_tracks %}
+                            <button class="h_container" onclick="like(this)" value="{{music.id}}_unlike" id="likeButton">
+                                <i id="heart-liked" class="heart fas fa-heart"></i>
+                            </button>
+                        {% else %}
+                            <button class="h_container" onclick="like(this)" value="{{music.id}}_like" id="likeButton">
+                                <i id="heart" class="heart fas fa-heart"></i>
+                            </button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

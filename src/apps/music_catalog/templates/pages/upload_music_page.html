@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-form">
+        <form action="" class="dark-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Загрузить трек</h2>
+            <p>{{UploadForm.Title}}</p>
+          <p>{{UploadForm.Author}}</p>
+          <p>{{UploadForm.Image.label }} {{UploadForm.Image}}</p>
+          <p>{{UploadForm.Audio.label }} {{UploadForm.Audio}}</p>
+            <button class='button-form' type="submit" value="Загрузить">Загрузить</button>
+        </form>
+    </div>
+
+{% endblock %}

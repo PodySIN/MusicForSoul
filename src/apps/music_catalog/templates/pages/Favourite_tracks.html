@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-catalog">
+        <h1>Любимые композиции</h1>
+        {% for music in Musics %}
+            <div class="item">
+                <img src="{{MEDIA_URL}}/media/{{music.Image}}" alt="Track cover" class="cover">
+                <div class="info">
+                    <a href="PlayMusic/{{music.id}}" class="title">{{music.Title}}</a>
+                    <a href="Author/{{music.Author_id}}" class="artist">{{music.Author}}</a>
+                    <audio id="CatalogAudio{{music.id}}" controls class="MyMainAudio" onended="AudioEnd({{music.id}},{{Len}})">
+                      <source src="{{MEDIA_URL}}/media/{{music.Music}}" type="audio/mp3">
+                    </audio>
+                </div>
+                <div class="actions">
+<button value="{{music.id}}_{{Len}}" class="loop-button" id="loopButton" onclick="loop(this)">loop</button>
+                    <i style="margin-top: 30px;" class="heart fas fa-heart"></i>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
